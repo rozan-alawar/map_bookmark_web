@@ -1,45 +1,148 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+![Screenshots](screenshots/Minimal%20Home.png)
+# [Flutter Minimal Website](https://gallery.codelessly.com/flutterwebsites/minimal/)
+[![Flutter Responsive](https://img.shields.io/badge/flutter-responsive-brightgreen.svg?style=flat-square)](https://github.com/Codelessly/ResponsiveFramework) [![GitHub release](https://img.shields.io/github/release/Codelessly/FlutterMinimalWebsite.svg?style=flat-square)](https://github.com/Codelessly/FlutterMinimalWebsite/releases) [![GitHub Release Date](https://img.shields.io/github/release-date/Codelessly/FlutterMinimalWebsite.svg?style=flat-square)](https://github.com/Codelessly/FlutterMinimalWebsite/releases) [![GitHub issues](https://img.shields.io/github/issues/Codelessly/FlutterMinimalWebsite.svg?style=flat-square)](https://github.com/Codelessly/FlutterMinimalWebsite/issues) [![GitHub top language](https://img.shields.io/github/languages/top/Codelessly/FlutterMinimalWebsite.svg?style=flat-square)](https://github.com/Codelessly/FlutterMinimalWebsite) [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Codelessly/FlutterMinimalWebsite.svg?style=flat-square)](https://github.com/Codelessly/FlutterMinimalWebsite) [![Libraries.io for GitHub](https://img.shields.io/librariesio/github/Codelessly/FlutterMinimalWebsite.svg?style=flat-square)](https://libraries.io/github/Codelessly/FlutterMinimalWebsite) [![License](https://img.shields.io/badge/License-BSD%200--Clause-orange.svg?style=flat-square)](https://opensource.org/licenses/0BSD)
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+<img src="assets/Minimal-Logo-iOS.png" width="128">
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+> ### A minimalistic website for blogs and portfolios built with Flutter.
 
----
+[View Flutter Minimal Website](https://gallery.codelessly.com/flutterwebsites/minimal/)
 
-## Edit a file
+[CanvasKit Renderer Version](https://gallery.codelessly.com/flutterwebsites/minimal-canvas/)
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
+[HTML Renderer Version](https://gallery.codelessly.com/flutterwebsites/minimal-html/)
 
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
+## Screenshots
 
----
+|List|Post| 
+|--|--|
+|![Screenshots](screenshots/Minimal%20List.png)|![Screenshots](screenshots/Minimal%20Post.png)|
 
-## Create a file
+## About
 
-Next, you’ll add a new file to this repository.
+This minimalistic website template was built as a demo for the [Flutter Responsive Framework](https://github.com/Codelessly/ResponsiveFramework) and to showcase the current state of Flutter Web. 
 
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
+Flutter Minimal Website is licensed under Zero-Clause BSD and released as Emailware. If you like this project or it helped you, please leave your email for updates. Although it is not required, I'd very much appreciate it!
 
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+<a href="https://gallery.codelessly.com/flutterwebsites/minimal/newsletter/" target="_blank"><img src="screenshots/Email%20Newsletter%20Signup.png"></a>
 
----
 
-## Clone a repository
+## Features
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+- [x] List Page
+    - [X] List Items
+    - [X] Pagination UI
+    - [X] Continue reading button
+    - [ ] Pagination generative routing
+    - [ ] Infinite scroll
+    - [ ] Blurb/ellipsize algorithm
+    - [ ] Sidebar
+    - [ ] Latest posts feature
+    - [ ] Social links
+    - [ ] Grid layout
+- [x] Post Page
+    - [X] Simple typography
+    - [X] Fixed height image
+    - [X] Tags
+    - [X] Author box
+    - [X] Pagination UI
+    - [ ] Advanced typography
+    - [ ] Inline image
+    - [ ] Image caption
+    - [ ] "Listen to post" audio player
+    - [ ] Social sharing
+    - [ ] Sidebar
+    - [ ] Automatic next post
+    - [ ] Recommended posts
+- [ ] Portfolio
+    - [ ] Image gallery
+    - [ ] Sort by tags
+    - [ ] Animated sort
+    - [ ] Image overlay
+    - [ ] Lightbox
+- [ ] About/Contact
+    - [ ] About us UI
+    - [ ] Social links
+    - [ ] Location map
+    - [ ] Contact form
+- [ ] Hero UI
+    - [ ] Hero slider
+    - [ ] Hero banner
+    - [ ] Hero fullscreen
+- [ ] Components
+    - [ ] Syntax/Code highlighter
+    - [ ] Dropdown menu
+    - [ ] Hamburger menu
+    - [ ] Charts
+    - [ ] Data table
+    - [ ] Popup
+    - [ ] Newsletter box
+- [ ] Pages
+    - [ ] 404
+    - [ ] Sitemap
+    - [ ] Search
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
+  
+## Contributors ❤️
 
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+Minimal Template is a good start but there are still a lot of features to develop. Let's work together to expand the capabilities of Flutter Web! You can help by:
+
+- Recommending "web ready" Flutter components to add to this project.
+- Developing "web ready" components (and letting me know!) 💕
+- Fork this project and build on top of it. 
+- Give me advice! 
+
+Please feel free to open an issue or reach out through one of the channel below. If you are thinking about contributing to this template, do not hesitate! There are no formal pull request requirements and I will work with you to get your contributions added.
+
+**Design:** 
+* [Ray Li](https://github.com/searchy2)
+
+**Development:** 
+* [Ray Li](https://github.com/searchy2)
+* *add yourself here by contributing*
+
+**Sponsor:** [Codelessly - No Code Automation Tools](https://codelessly.com)
+
+<a href="mailto:ray@codelessly.com">
+  <img alt="Codelessly Email"
+       src="https://lh3.googleusercontent.com/yN_m90WN_HSCohXdgC2k91uSTk9dnYfoxTYwG_mv_l5_05dV2CzkQ1B6rEqH4uqdgjA=w96" />
+</a>
+<a href="https://codelessly.com">
+  <img alt="Codelessly Website"
+       src="https://lh3.googleusercontent.com/YmMGcgeO7Km9-J9vFRByov5sb7OUKetnKs8pTi0JZMDj3GVJ61GMTcTlHB7u9uHDHag=w96" />
+</a>
+<a href="https://twitter.com/BuildCodelessly">
+  <img alt="Codelessly Twitter"
+       src="https://lh3.ggpht.com/lSLM0xhCA1RZOwaQcjhlwmsvaIQYaP3c5qbDKCgLALhydrgExnaSKZdGa8S3YtRuVA=w96" />
+</a>
+<a href="https://github.com/Codelessly">
+  <img alt="Codelessly GitHub"
+       src="https://lh3.googleusercontent.com/L15QqmKK7Vl-Ag1ZxaBqNQlXVEw58JT2BDb-ef5t2eboDh0pPSLjDgi3-aQ3Opdhhyk=w96" />
+</a>
+<br></br>
+<a href="https://github.com/Codelessly/ResponsiveFramework">
+  <img alt="Built with Responsive Framework"
+       src="screenshots/Built%20with%20Responsive%20Badge.png" />
+</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/flutter/flutter">
+  <img alt="Flutter"
+       src="screenshots/Flutter%20Logo%20Banner.png" />
+</a>
+
+
+## License
+
+    BSD Zero Clause License
+
+    Copyright © 2020 Codelessly
+
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
