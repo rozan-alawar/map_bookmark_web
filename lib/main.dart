@@ -5,15 +5,19 @@ import 'package:minimal/pages/auth/login.dart';
 import 'package:minimal/pages/auth/signup.dart';
 import 'package:minimal/pages/intro_page.dart';
 import 'package:minimal/routes.dart';
+import 'package:minimal/utils/cache_helper.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'pages/home_page.dart';
 import 'pages/taps/profile_page.dart';
 import 'utils/styles/theme_manager.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ScreenUtil.ensureScreenSize();
+
+  await CacheHelper.init();
+
   runApp(
     const ProviderScope(
       child: MyApp(),

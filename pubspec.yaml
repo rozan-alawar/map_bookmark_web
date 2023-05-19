@@ -21,7 +21,10 @@ dependencies:
   flutter_screenutil:
   google_maps_flutter_web: ^0.4.0+7
   geocode: ^1.0.0
-  http: ^0.13.5
+  url_launcher: ^6.0.0
+  shared_preferences: ^2.1.1
+  flutter_google_places: ^0.3.0
+  dio:
 
 dev_dependencies:
   flutter_test:

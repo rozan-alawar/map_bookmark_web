@@ -19,7 +19,79 @@ class MapNotifier extends ChangeNotifier {
   String startAddress = '';
   LatLng? currentLocation;
 
+  Marker? startMarker;
+  Marker? endMarker;
+  double distance = 0;
+
   bool isLoading = false;
+
+  void addMarker(LatLng position) {
+    if (startMarker == null) {
+      startMarker = Marker(
+        markerId: const MarkerId('startMarker'),
+        position: position,
+        infoWindow: const InfoWindow(title: 'Start Location'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+      );
+    } else if (endMarker == null) {
+      endMarker = Marker(
+        markerId: const MarkerId('endMarker'),
+        position: position,
+        infoWindow: const InfoWindow(title: 'End Location'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+      );
+    } else {
+      // Clear previous markers
+      startMarker = null;
+      endMarker = null;
+
+      // Add new marker
+      startMarker = Marker(
+        markerId: const MarkerId('startMarker'),
+        position: position,
+        infoWindow: const InfoWindow(title: 'Start Location'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+      );
+    }
+    notifyListeners();
+  }
+
+  void calculateDistance(BuildContext context) async {
+    if (startMarker == null || endMarker == null) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Please select both start and end locations.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
+    // Get the latitude and longitude of the start and end locations
+    LatLng startLocation = startMarker!.position;
+    LatLng endLocation = endMarker!.position;
+
+    // Calculate the distance between the two locations
+    double calculatedDistance = Geolocator.distanceBetween(
+      startLocation.latitude,
+      startLocation.longitude,
+      endLocation.latitude,
+      endLocation.longitude,
+    );
+
+    distance = calculatedDistance;
+  }
 
   Future<bool> _handleLocationPermission() async {
     bool serviceEnabled;
@@ -89,30 +161,43 @@ class MapNotifier extends ChangeNotifier {
         ),
       ),
     );
-    // getAddressFromLatLong(location);
-    print(Geolocator.distanceBetween(31.5017, 34.4669, 32.5017, 35.4669));
+    // print(Geolocator.distanceBetween(31.5017, 34.4669, 32.5017, 35.4669));
     notifyListeners();
   }
 
   String key = 'AIzaSyB4nJ_35oFFm0vh6dBeXdncZfWc7Jouhwc';
-  searchandNavigate() {
-    // placemarkFromAddress(searchAddr).then((result) {
-    //   mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-    //       target:
-    //           LatLng(result[0].position.latitude, result[0].position.longitude),
-    //       zoom: 10.0)));
-    // });
-  }
 
   Future<String> getPlaceByID(String input) async {
-    print('lkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
     String url =
         'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=$input&inputtype=textquery&key=$key';
     final response = await http.get(Uri.parse(url));
     final json = jsonDecode(response.body);
     final placeId = json['candidates'][0]['place_id'];
     print(placeId);
+
     return placeId;
+  }
+
+  Future<Map<String, dynamic>> getPlace(String input) async {
+    String placeId = await getPlaceByID(input);
+    String url =
+        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&inputtype=textquery&key=$key';
+    final response = await http.get(Uri.parse(url));
+    final json = jsonDecode(response.body);
+    var result = json['result'] as Map<String, dynamic>;
+    print(result);
+    return result;
+  }
+
+  Future<void> goToPlace(Map<String, dynamic> place) async {
+    final double lat = place['geometry']['location']['lat'];
+    final double lng = place['geometry']['location']['lng'];
+    mapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(lat, lng), zoom: 12),
+      ),
+    );
+    notifyListeners();
   }
 }
 

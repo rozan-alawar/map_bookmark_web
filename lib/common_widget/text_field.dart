@@ -20,6 +20,8 @@ class CommonTextField extends ConsumerWidget {
     this.fillColor,
     this.style,
     this.width = 500,
+    this.onSaved,
+    this.onChanged,
   });
 
   final String? hintText;
@@ -32,6 +34,8 @@ class CommonTextField extends ConsumerWidget {
   final InputDecoration? decoration;
   final TextStyle? style;
   final Color? fillColor;
+  final void Function()? onSaved;
+  final void Function(String?)? onChanged;
   final double width;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,14 +46,16 @@ class CommonTextField extends ConsumerWidget {
       validator: validator,
       controller: controller,
       obscureText: isPassword,
+      onEditingComplete: onSaved,
+      onChanged: onChanged,
       textCapitalization: TextCapitalization.words,
       decoration: decoration ??
           InputDecoration(
             fillColor: fillColor,
             prefix: prefix,
-            suffix: suffix,
+            suffixIcon: suffix,
             hintText: hintText ?? '',
-            constraints: BoxConstraints(maxHeight: 45.h, maxWidth: width.w),
+            constraints: BoxConstraints(maxHeight: 80.h, maxWidth: width.w),
             hintStyle: getRegularStyle(
               color: ColorManager.lightBlack,
               fontSize: 14,

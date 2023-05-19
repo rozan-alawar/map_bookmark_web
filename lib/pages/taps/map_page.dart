@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../common_widget/text_field.dart';
 import '../../controllers/map_provider.dart';
 
 class MapPage extends ConsumerStatefulWidget {
@@ -24,57 +22,28 @@ class _MapPageState extends ConsumerState<MapPage> {
     final provider = ref.watch(mapProvider);
 
     return Scaffold(
-      body: Stack(
-        children: [
-          GoogleMap(
-            onMapCreated: (controller) => provider.onMapCreated(controller),
-            onTap: (argument) => provider.onMapTapped(argument),
-            initialCameraPosition: CameraPosition(
-              target: provider.selectedLocation,
-              zoom: 15,
-            ),
-            zoomControlsEnabled: false,
-            markers: {
-              Marker(
-                markerId: const MarkerId('new_marker'),
-                position: provider.selectedLocation,
-              )
-            },
+      body: GoogleMap(
+          onMapCreated: (controller) => provider.onMapCreated(controller),
+          onTap: (argument) => provider.onMapTapped(argument),
+          initialCameraPosition: CameraPosition(
+            target: provider.selectedLocation,
+            zoom: 15,
           ),
-          Positioned(
-            top: 10,
-            left: 300.w,
-            child: Material(
-              elevation: 10,
-              borderRadius: BorderRadius.circular(7.r),
-              child: Stack(
-                alignment: AlignmentDirectional.centerEnd,
-                children: [
-                  CommonTextField(
-                    controller: provider.cityController,
-                    hintText: 'Search by city',
-                    width: 1500.w,
+          zoomControlsEnabled: false,
+          markers: {
+            provider.startMarker != null
+                ? provider.startMarker!
+                : Marker(
+                    markerId: const MarkerId('id'),
+                    position: provider.selectedLocation,
                   ),
-                  Positioned(
-                    right: 0,
-                    child: InkWell(
-                      onTap: () {
-                        ref.read(mapProvider).getPlaceByID(
-                              provider.cityController.text,
-                            );
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        child: const Icon(Icons.search),
-                      ),
-                    ),
+            provider.endMarker != null
+                ? provider.endMarker!
+                : Marker(
+                    markerId: const MarkerId('marker'),
+                    position: provider.selectedLocation,
                   ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+          }),
     );
   }
 }

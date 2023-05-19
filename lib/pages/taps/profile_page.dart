@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProfilePage extends StatelessWidget {
+import '../../controllers/auth_provider.dart';
+
+class ProfilePage extends ConsumerWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final auth = ref.watch(authProvider.notifier);
+
     return Scaffold(
       body: Column(
         children: [
@@ -17,14 +22,14 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   const SizedBox(height: 16),
                   Text(
-                    "Richie Lorie",
+                    auth.user!.username!,
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 30),
-                  const _ProfileInfoRow()
+                  _ProfileInfoRow(auth: auth)
                 ],
               ),
             ),
@@ -35,14 +40,34 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-class _ProfileInfoRow extends StatelessWidget {
-  const _ProfileInfoRow({Key? key}) : super(key: key);
+class _ProfileInfoRow extends StatefulWidget {
+  const _ProfileInfoRow({Key? key, required this.auth}) : super(key: key);
+  final AuthNotifier auth;
 
-  final List<ProfileInfoItem> _items = const [
-    ProfileInfoItem("Email", 'rLorie@gmail.com'),
-    ProfileInfoItem("Phone", '05955353752'),
-    ProfileInfoItem("Country", 'Palestine ,Gaza'),
-  ];
+  @override
+  State<_ProfileInfoRow> createState() => _ProfileInfoRowState();
+}
+
+class _ProfileInfoRowState extends State<_ProfileInfoRow> {
+  late List<ProfileInfoItem> _items;
+  @override
+  void initState() {
+    super.initState();
+    _items = [
+      ProfileInfoItem(
+        "Email",
+        widget.auth.user!.email!,
+      ),
+      ProfileInfoItem(
+        "Phone",
+        widget.auth.user!.mobile!,
+      ),
+      ProfileInfoItem(
+        "Country",
+        widget.auth.user!.country!,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
