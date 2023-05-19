@@ -25,7 +25,6 @@ class _FavoritePageState extends ConsumerState<FavoritePage> {
           : Container(
               constraints: const BoxConstraints(maxWidth: double.infinity),
               child: ListView.builder(
-                shrinkWrap: true,
                 itemCount: ref.watch(favoriteProvider).favorites!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(

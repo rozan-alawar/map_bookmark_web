@@ -27,7 +27,7 @@ class _MapPageState extends ConsumerState<MapPage> {
           onTap: (argument) => provider.onMapTapped(argument),
           initialCameraPosition: CameraPosition(
             target: provider.selectedLocation,
-            zoom: 15,
+            zoom: 12,
           ),
           zoomControlsEnabled: false,
           markers: {

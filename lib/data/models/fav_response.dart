@@ -36,7 +36,6 @@ class Favorite {
   String? username;
   String? title;
   String? desc;
-  double? rating;
   String? long;
   String? lat;
   String? createdAt;
@@ -48,7 +47,6 @@ class Favorite {
       this.username,
       this.title,
       this.desc,
-      this.rating,
       this.long,
       this.lat,
       this.createdAt,
@@ -60,7 +58,6 @@ class Favorite {
     username = json['username'];
     title = json['title'];
     desc = json['desc'];
-    rating = json['rating'];
     long = json['long'];
     lat = json['lat'];
     createdAt = json['createdAt'];
@@ -74,12 +71,39 @@ class Favorite {
     data['username'] = username;
     data['title'] = title;
     data['desc'] = desc;
-    data['rating'] = rating;
     data['long'] = long;
     data['lat'] = lat;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
     data['__v'] = iV;
+    return data;
+  }
+}
+
+class AddToFavorite {
+  int? code;
+  String? massege;
+  bool? success;
+  Favorite? data;
+
+  AddToFavorite({this.code, this.success, this.data, this.massege});
+
+  AddToFavorite.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    success = json['success'];
+    massege = json['massege'];
+    data = Favorite.fromJson(json['data']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['code'] = code;
+    data['success'] = success;
+    data['massege'] = massege;
+
+    if (this.data != null) {
+      data['data'] = data;
+    }
     return data;
   }
 }

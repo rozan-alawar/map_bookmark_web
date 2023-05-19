@@ -116,29 +116,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           Positioned(
             top: 330.h,
             left: 10.w,
-            child: Row(
-              children: const [
-                Icon(
-                  Icons.star_border_rounded,
-                  color: Colors.amber,
-                ),
-                SizedBox(width: 10),
-                Text('Add city to favorite'),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 370.h,
-            left: 10.w,
-            child: Row(
-              children: const [
-                Icon(
-                  Icons.pin_drop,
-                  color: Colors.red,
-                ),
-                SizedBox(width: 10),
-                Text('Add pins to favorite'),
-              ],
+            child: InkWell(
+              onTap: () {
+                ref.read(favoriteProvider).addToFavorites(context: context);
+              },
+              child: Row(
+                children: const [
+                  Icon(
+                    Icons.pin_drop,
+                    color: Colors.red,
+                  ),
+                  SizedBox(width: 10),
+                  Text('Add to favorite'),
+                ],
+              ),
             ),
           ),
         ],

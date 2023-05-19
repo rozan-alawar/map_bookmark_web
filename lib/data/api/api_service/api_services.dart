@@ -70,6 +70,25 @@ class ApiServices {
     FavoriteResponse favResponse = FavoriteResponse.fromJson(response.data);
     return favResponse;
   }
+
+// --------------------------------    ADD TO FAVOURITES     -------------------------------------------------
+
+  Future<AddToFavorite> addToFavorites({
+    required String username,
+    required String title,
+    required String lat,
+    required String long,
+  }) async {
+    final response = await _dio.post(ApiConstants.favEndpoint, data: {
+      "username": username,
+      "title": title,
+      "desc": "Favorite place",
+      "lat": lat,
+      "long": long,
+    });
+
+    return AddToFavorite.fromJson(response.data);
+  }
 }
 
 final apiServices = Provider((ref) => ApiServices());

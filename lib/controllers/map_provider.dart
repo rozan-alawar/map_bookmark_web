@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:convert';
@@ -127,15 +126,20 @@ class MapNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getAddressFromLatLong(LatLng position) async {
-    GeoCode geocode = GeoCode();
-    Address add = await geocode.reverseGeocoding(
-      latitude: position.latitude,
-      longitude: position.longitude,
-    );
-    currentAddress =
-        '${add.countryName ?? ''} - ${add.region ?? ''} - ${add.city ?? ''} - ${add.streetAddress ?? ''}';
-    print(currentAddress);
+  Future<String> getAddressFromLatLong(LatLng position) async {
+    final url =
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.latitude},${position.longitude}&key=$key';
+
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final jsonResult = json.decode(response.body);
+      if (jsonResult['status'] == 'OK') {
+        print(jsonResult['results'][0]['formatted_address']);
+        return jsonResult['results'][0]['formatted_address'];
+      }
+    }
+    return 'Gaza';
   }
 
   void onInit() {
@@ -157,11 +161,11 @@ class MapNotifier extends ChangeNotifier {
       CameraUpdate.newCameraPosition(
         CameraPosition(
           target: location,
-          zoom: 15,
+          zoom: 12,
         ),
       ),
     );
-    // print(Geolocator.distanceBetween(31.5017, 34.4669, 32.5017, 35.4669));
+    getAddressFromLatLong(location);
     notifyListeners();
   }
 
