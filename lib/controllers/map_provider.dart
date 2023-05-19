@@ -18,51 +18,21 @@ class MapNotifier extends ChangeNotifier {
   String startAddress = '';
   LatLng? currentLocation;
 
-  Marker? startMarker;
-  Marker? endMarker;
   double distance = 0;
+  bool distanceCal = false;
 
   bool isLoading = false;
 
-  void addMarker(LatLng position) {
-    if (startMarker == null) {
-      startMarker = Marker(
-        markerId: const MarkerId('startMarker'),
-        position: position,
-        infoWindow: const InfoWindow(title: 'Start Location'),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-      );
-    } else if (endMarker == null) {
-      endMarker = Marker(
-        markerId: const MarkerId('endMarker'),
-        position: position,
-        infoWindow: const InfoWindow(title: 'End Location'),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-      );
-    } else {
-      // Clear previous markers
-      startMarker = null;
-      endMarker = null;
-
-      // Add new marker
-      startMarker = Marker(
-        markerId: const MarkerId('startMarker'),
-        position: position,
-        infoWindow: const InfoWindow(title: 'Start Location'),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-      );
-    }
-    notifyListeners();
-  }
-
-  void calculateDistance(BuildContext context) async {
-    if (startMarker == null || endMarker == null) {
+  void calculateDistance(
+      BuildContext context, LatLng? startLocation, LatLng? endLocation) async {
+    if (startLocation == null || endLocation == null) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Error'),
-            content: const Text('Please select both start and end locations.'),
+            content:
+                const Text('Please Enter both First and Second locations.'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -77,10 +47,6 @@ class MapNotifier extends ChangeNotifier {
       return;
     }
 
-    // Get the latitude and longitude of the start and end locations
-    LatLng startLocation = startMarker!.position;
-    LatLng endLocation = endMarker!.position;
-
     // Calculate the distance between the two locations
     double calculatedDistance = Geolocator.distanceBetween(
       startLocation.latitude,
@@ -90,6 +56,22 @@ class MapNotifier extends ChangeNotifier {
     );
 
     distance = calculatedDistance;
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Distance'),
+            content: Text('The Distance between givien cities is $distance'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        });
   }
 
   Future<bool> _handleLocationPermission() async {

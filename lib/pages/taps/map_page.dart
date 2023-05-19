@@ -31,18 +31,10 @@ class _MapPageState extends ConsumerState<MapPage> {
           ),
           zoomControlsEnabled: false,
           markers: {
-            provider.startMarker != null
-                ? provider.startMarker!
-                : Marker(
-                    markerId: const MarkerId('id'),
-                    position: provider.selectedLocation,
-                  ),
-            provider.endMarker != null
-                ? provider.endMarker!
-                : Marker(
-                    markerId: const MarkerId('marker'),
-                    position: provider.selectedLocation,
-                  ),
+            Marker(
+              markerId: const MarkerId('marker'),
+              position: provider.selectedLocation,
+            ),
           }),
     );
   }

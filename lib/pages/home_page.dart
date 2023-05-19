@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:minimal/common_widget/button.dart';
 import 'package:minimal/controllers/pages_provider.dart';
+import 'package:minimal/utils/styles/styles_manager.dart';
 
 import '../common_widget/text_field.dart';
 import '../controllers/favorite_provider.dart';
@@ -97,7 +100,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: CommonTextField(
                 controller: ref.watch(mapProvider).cityController,
                 hintText: 'Search by city name',
-                width: 600.w,
+                width: 900.w,
                 onChanged: (value) => print(value),
                 onSaved: () async {
                   var place = await ref
@@ -123,12 +126,83 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: Row(
                 children: const [
                   Icon(
-                    Icons.pin_drop,
-                    color: Colors.red,
+                    Icons.star,
+                    color: Colors.amber,
                   ),
                   SizedBox(width: 10),
                   Text('Add to favorite'),
                 ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 370.h,
+            left: 10.w,
+            child: InkWell(
+              onTap: () {},
+              child: SizedBox(
+                width: 450.w,
+                child: ExpansionTile(
+                  tilePadding: const EdgeInsets.all(0),
+                  title: Row(
+                    children: const [
+                      Icon(
+                        Icons.pin_drop,
+                        color: Colors.red,
+                      ),
+                      SizedBox(width: 10),
+                      Text('Calculate distance'),
+                    ],
+                  ),
+                  children: [
+                    Material(
+                      elevation: 10,
+                      borderRadius: BorderRadius.circular(7.r),
+                      child: CommonTextField(
+                        controller:
+                            ref.watch(mapProvider).startAddressController,
+                        hintText: 'Enter first city name',
+                        width: 900.w,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Material(
+                      elevation: 10,
+                      borderRadius: BorderRadius.circular(7.r),
+                      child: CommonTextField(
+                        controller:
+                            ref.watch(mapProvider).destinationAddressController,
+                        hintText: 'Enter second city name',
+                        width: 900.w,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    CommonButton(
+                      onPressed: () async {
+                        final map = ref.read(mapProvider);
+                        final place1 =
+                            await map.getPlace(map.startAddressController.text);
+                        final place2 = await map
+                            .getPlace(map.destinationAddressController.text);
+                        map.calculateDistance(
+                          context,
+                          LatLng(place1['geometry']['location']['lat'],
+                              place1['geometry']['location']['lng']),
+                          LatLng(place2['geometry']['location']['lat'],
+                              place2['geometry']['location']['lng']),
+                        );
+                      },
+                      child: FittedBox(
+                        child: Text(
+                          'Calculate distance',
+                          style: getRegularStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
